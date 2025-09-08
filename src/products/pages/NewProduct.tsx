@@ -1,4 +1,4 @@
-import { Button, Image, Input, Textarea } from "@nextui-org/react";
+import { Button, Image, Input, Textarea } from "@heroui/react";
 
 export const NewProduct = () => {
 
