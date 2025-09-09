@@ -1,9 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@source "../src/**/*.{html,js,ts,jsx,tsx}";
+@source "../index.html";
+@plugin "../hero.ts";
 
-
-
-html,body {
+html,
+body {
   background-color: black;
 }

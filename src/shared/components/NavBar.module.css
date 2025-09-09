@@ -1,5 +1,4 @@
-
-
+@reference "../../index.css";
 
 .active {
   @apply text-blue-500;
