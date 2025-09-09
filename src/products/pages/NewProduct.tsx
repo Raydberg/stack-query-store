@@ -2,6 +2,9 @@ import { Button, Image, Input, Textarea } from "@heroui/react";
 import { Product } from '../interfaces/product';
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { productService } from "../services/product.service";
+import { useProductMutation } from "../hooks/useProductMutation";
 
 
 interface FormInputs {
@@ -14,6 +17,9 @@ interface FormInputs {
 
 export const NewProduct = () => {
 
+
+   const {productMutation} = useProductMutation()
+ 
   const { control, handleSubmit, watch } = useForm<FormInputs>({
     defaultValues: {
       title: '',
@@ -29,6 +35,7 @@ export const NewProduct = () => {
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     console.log(data.category)
+    productMutation.mutate(data)
   }
 
   return (
@@ -87,7 +94,14 @@ export const NewProduct = () => {
             />
 
             <br />
-            <Button type="submit" disableAnimation={true} className="mt-2" color="primary">Crear</Button>
+            <Button
+              type="submit"
+              disableAnimation={true}
+              className="mt-2"
+              isDisabled={productMutation.isPending}
+              color="primary">
+              {productMutation.isPending ? 'Cargando ..' : 'Crear producto'}
+            </Button>
           </div>
 
           <div className="bg-white rounded-2xl p-10 flex items-center" style={{
